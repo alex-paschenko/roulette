@@ -1,0 +1,47 @@
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+      const spoilers = document.querySelectorAll('.spoiler');
+
+      spoilers.forEach(spoiler => {
+          const showButton = spoiler.querySelector('.show-button');
+          const hideButton = spoiler.querySelector('.hide-button');
+          const content = spoiler.querySelector('.spoiler-content');
+
+          showButton.addEventListener('click', () => {
+              content.style.display = 'block';
+              showButton.style.display = 'none';
+              hideButton.style.display = 'inline';
+          });
+
+          hideButton.addEventListener('click', () => {
+              content.style.display = 'none';
+              hideButton.style.display = 'none';
+              showButton.style.display = 'inline';
+          });
+      });
+
+      // Function to open spoiler based on hash
+      const openSpoilerFromHash = () => {
+          const hash = window.location.hash;
+          if (hash) {
+              const targetSection = document.querySelector(hash);
+              if (targetSection) {
+                  const spoilerContent = targetSection.querySelector('.spoiler-content');
+                  const showButton = targetSection.querySelector('.show-button');
+                  const hideButton = targetSection.querySelector('.hide-button');
+
+                  spoilerContent.style.display = 'block';
+                  showButton.style.display = 'none';
+                  hideButton.style.display = 'inline';
+                  targetSection.scrollIntoView({ behavior: 'smooth' }); // Smooth scrolling
+              }
+          }
+      };
+
+      // Open spoiler on initial load
+      openSpoilerFromHash();
+
+      // Open spoiler on hash change
+      window.addEventListener('hashchange', openSpoilerFromHash);
+  });
+</script>
