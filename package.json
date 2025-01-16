@@ -1,10 +1,23 @@
 {
   "name": "roulette",
-  "version": "1.0.0",
-  "description": "roulette",
-  "main": "index.js",
+  "version": "0.1.0",
+  "description": "A fast, lightweight, zero-dependency ts/js package that makes working with random numbers a breeze.",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
+
   "scripts": {
-    "test": "jest --config=jest.config.ts --coverage"
+    "test": "jest --config=jest.config.ts --coverage",
+    "build": "npm run build:esm && npm run build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --project tsconfig.cjs.json"
+
   },
   "keywords": [
     "roulette",

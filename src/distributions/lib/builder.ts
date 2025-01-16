@@ -1,3 +1,5 @@
+export type UniformRandom = (range: { min: number; max: number }) => number;
+
 type EProviderType<Storage = any, EProviderParams = any> = (
   context: { storage?: Storage , eProviderParams?: EProviderParams },
   range: { min: number; max: number },
@@ -18,13 +20,31 @@ type ExtractEPContext<T> = T extends EProviderType<infer Storage, infer EProvide
 
 type ExtractStorageType<EntropyProvider extends EProviderType> =
   unknown extends Parameters<EntropyProvider>[0]['storage']
-    ? never
+    ? unknown
     : Parameters<EntropyProvider>[0]['storage'];
+
+interface BuilderI<
+  EntropyProvider extends EProviderType<any, any>,
+  FnRandom extends FnRandomType<any>,
+> {
+  random: (
+    params: Parameters<FnRandom>[0] &
+      Omit<ExtractEPContext<EntropyProvider>, 'storage'>,
+  ) => number;
+  getStorage: () => ExtractStorageType<EntropyProvider>;
+  setStorage: (storage: ExtractStorageType<EntropyProvider>) => void;
+  with: (
+    newFn: EProviderType<any, any>,
+  ) => BuilderI<EntropyProvider, FnRandom>;
+};
 
 function Builder<
   EntropyProvider extends EProviderType<any, any>,
   FnRandom extends FnRandomType<any>,
-> (entropyProvider: EntropyProvider, fnRandom: FnRandom) {
+> (
+  entropyProvider: EntropyProvider,
+  fnRandom: FnRandom,
+): BuilderI<EntropyProvider, FnRandom> {
   abstract class Distribution {
     protected constructor() {
       throw new Error('You cannot create an instance of this class.');
@@ -65,12 +85,10 @@ function Builder<
       return this;
     }
 
-    public static with(newFn: EProviderType<any>) {
-      return Builder<typeof newEp, typeof this.fnRandom>(newFn, this.fnRandom);
-    }
-
-    protected static withInternal<NewFn extends EProviderType<any>>(newFn: NewFn) {
-      return Builder(newFn, this.fnRandom);
+    public static with<NewEntropyProvider extends EProviderType<any, any>>(
+      newFn: NewEntropyProvider,
+    ) {
+      return Builder<NewEntropyProvider, typeof this.fnRandom>(newFn, this.fnRandom);
     }
   }
 
