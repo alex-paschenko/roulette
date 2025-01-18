@@ -4,193 +4,62 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Roulette</title>
-  <!-- Highlight.js Theme: Atom One Light -->
+  <link rel="stylesheet" href="./css/main.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-light.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/javascript.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/typescript.min.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      margin: 20px;
-      background-color: #f4f4f9;
-      max-width: 800px;
-    }
-
-    h2 {
-      font-size: 120%;
-      color: #34495e;
-    }
-
-    h3 {
-      font-size: 110%;
-      color: #2c3e50;
-      margin-top: 20px;
-      margin-bottom: 7px;
-    }
-
-    h4 {
-      font-size: 105%;
-      color: #617f9d;
-      margin-top: 15px;
-      margin-bottom: 0;
-    }
-
-    p {
-      font-size: medium;
-      margin: 1px;
-    }
-
-    nav {
-      font-size: 90%;
-    }
-
-    .code-block {
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      overflow: hidden;
-      background-color: #fafafa;
-      color: #333;
-      margin-bottom: 20px;
-    }
-
-    .code-buttons {
-      display: flex;
-      background-color: #e8e8e8;
-    }
-
-    .code-buttons button {
-      flex: 1;
-      padding: 10px;
-      cursor: pointer;
-      background: #eaeaeb;
-      color: #91929c;
-      border: none;
-      outline: none;
-      font-size: 60%;
-    }
-
-    .code-buttons button.active {
-      background: #e7f0f9;
-      color: #7676a7;
-    }
-
-    pre {
-      margin: 0;
-      padding: 0;
-      overflow-x: auto;
-    }
-
-    pre.js {
-      display: none;
-    }
-
-    pre.ts {
-      display: none;
-    }
-
-    pre.active {
-      display: block;
-    }
-
-    .inline-code {
-      font-family: monospace;
-      background-color: #ededed;
-      padding: 2px 4px;
-      border-radius: 3px;
-      color: #333;
-      display: inline-block;
-    }
-
-    .spoiler {
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      overflow: hidden;
-    }
-
-    .spoiler-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 15px;
-      background-color: #f4f4f4;
-    }
-
-    .spoiler-header h3 {
-      margin: 0;
-      font-size: 85%;
-    }
-
-    .spoiler-header h3:hover {
-      color: blue;
-      text-decoration: underline;
-      cursor: pointer;
-    }
-
-    .spoiler-header button {
-      background: none;
-      border: none;
-      color: #007bff;
-      text-decoration: underline;
-      cursor: pointer;
-      font-size: 85%;
-    }
-
-    .spoiler-header button:hover {
-      color: #0056b3;
-    }
-
-    .spoiler-content {
-      display: none;
-      padding: 15px;
-      background-color: #fff;
-      border-top: 1px solid #ccc;
-    }
-
-    .notes {
-      font-size: 80%;
-    }
-  </style>
+  <link rel="stylesheet" href="./css/main.css">
 </head>
 <body>
-  <h2>Roulette</h2>
-  <p>A fast, lightweight, zero-dependency ts/js package that makes working with random numbers a breeze.</p>
-  <nav>
-    <h4>Table of content</h4>
-    <ul>
-      <li><a href="#distributions">Generating random numbers based on different distributions</a></li>
-      <li>
-        Picking a random element from an array
+  <div class="flex-container">
+    <img style="width: 300px; height: 300px; margin:25px; object-fit: cover;" src="./roulette.png" alt="Roulette logo" />
+    <div style="flex:1">
+      <h2>Roulette</h2>
+      <p>A fast, lightweight, zero-dependency ts/js package that makes working with random numbers a breeze.</p>
+      <p>Simple, flexible, and ready to roll!</p>
+      <nav>
+        <h4>Table of content</h4>
         <ul>
-          <li><a href="#regular-roulette">based on these distributions.</a></li>
-          <li><a href="#rigger-roulette">using probabilities you define yourself.</a></li>
+          <li><a href="#distributions">Generating random numbers based on different distributions</a></li>
+          <li>
+            Picking a random element from an array
+            <ul>
+              <li><a href="#regular-roulette">based on these distributions.</a></li>
+              <li><a href="#rigger-roulette">using probabilities you define yourself.</a></li>
+            </ul>
+          </li>
+          <li>
+            Appendixes
+            <ul>
+              <li><a href="#boosting-randomness">Boosting randomness</a></li>
+            </ul>
+          </li>
         </ul>
-      </li>
-      <li>
-        Appendixes
-        <ul>
-          <li><a href="#boosting-randomness">Boosting randomness</a></li>
-        </ul>
-      </li>
-    </ul>
-  </nav>
-  <p>Simple, flexible, and ready to roll!</p>
+      </nav>
+    </div>
+  </div>
+
+
 
   <section id="distributions">
     <p>The Roulette library offers nearly all popular probability distributions.</p>
-    <p>Each probability distribution is generated by a corresponding static class derived
+    <p>Each probability distribution is generated by a corresponding <strong>static</strong> class derived
       from the Distribution class (so, don&#39;t try to instantiate these classes!).</p>
-    <p> All these classes share the same interface. We'll discuss this interface later, but for 99% of use cases, you only need one method from these classes: random, which takes parameters specific to the distribution.</p>
+    <p> All these classes share the same interface. We'll discuss this interface later. But for 99% of use cases, you
+      only need one method from these classes: <span class="inline-code language-javascript">random(...)</span>,
+      which takes parameters specific to the distribution.</p>
     <p>To reduce bundle size, each class can be imported separately.
       For instance, the Bernoulli distribution generator can be imported not only as:</p>
-    <div class="code-block"><pre><code class="language-typescript">import { Bernoulli } from 'roulette';</code></pre></div>
+    <div class="code-block">
+      <pre><code class="language-typescript">import { Bernoulli } from 'roulette';</code></pre>
+    </div>
     <p>but also as:</p>
-    <div class="code-block"><pre><code class="language-typescript">import Bernoulli from 'roulette/Bernoulli';</code></pre></div>
-    <p>This approach, when working with one or a few distributions, allows you to shrink the size of the imported
-      code to just 150–500 bytes!</p>
-    <p>Below is a list of all currently supported distributions, arranged alphabetically. Click on a distribution name
+    <div class="code-block">
+      <pre><code class="language-typescript">import Bernoulli from 'roulette/Bernoulli.js';</code></pre>
+    </div>
+    <p>This approach allows you to shrink the size of the imported code to just 150–500 bytes!</p>
+    <p>Below is a list of all currently supported distributions (arranged alphabetically). Click on a distribution name
       to view details.</p>
   </section>
 

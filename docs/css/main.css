@@ -1,0 +1,154 @@
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 20px;
+  background-color: #f4f4f9;
+  width: 100%;
+  min-width: 800px;
+  max-width: 1000px;
+}
+
+h2 {
+  font-size: 120%;
+  color: #34495e;
+}
+
+h3 {
+  font-size: 110%;
+  color: #2c3e50;
+  margin-top: 20px;
+  margin-bottom: 7px;
+}
+
+h4 {
+  font-size: 105%;
+  color: #617f9d;
+  margin-top: 15px;
+  margin-bottom: 0;
+}
+
+p {
+  font-size: medium;
+  margin: 1px;
+}
+
+nav {
+  font-size: 90%;
+}
+
+.code-block {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: #fafafa;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.code-buttons {
+  display: flex;
+  background-color: #e8e8e8;
+}
+
+.code-buttons button {
+  flex: 1;
+  padding: 10px;
+  cursor: pointer;
+  background: #eaeaeb;
+  color: #91929c;
+  border: none;
+  outline: none;
+  font-size: 60%;
+}
+
+.code-buttons button.active {
+  background: #e7f0f9;
+  color: #7676a7;
+}
+
+pre {
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+}
+
+pre.js {
+  display: none;
+}
+
+pre.ts {
+  display: none;
+}
+
+pre.active {
+  display: block;
+}
+
+.inline-code {
+  font-family: monospace;
+  background-color: #ededed;
+  padding: 2px 4px;
+  border-radius: 3px;
+  color: #333;
+  display: inline-block;
+}
+
+.spoiler {
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.spoiler-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  background-color: #f4f4f4;
+}
+
+.spoiler-header h3 {
+  margin: 0;
+  font-size: 85%;
+}
+
+.spoiler-header h3:hover {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.spoiler-header button {
+  background: none;
+  border: none;
+  color: #007bff;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 85%;
+}
+
+.spoiler-header button:hover {
+  color: #0056b3;
+}
+
+.spoiler-content {
+  display: none;
+  padding: 15px;
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+}
+
+.description {
+  font-size: 95%;
+}
+
+.notes {
+  font-size: 80%;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+
+}

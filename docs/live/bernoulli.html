@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Column Chart with Random Numbers</title>
+  <script type="module" src="https://code.highcharts.com/es-modules/masters/highcharts.src.js"></script>
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+  <!-- Описание -->
+  <div id="description">
+    <h1>Column Chart Example</h1>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </p>
+  </div>
+
+  <!-- Column Chart -->
+  <div id="chart-container" style="width: 150px; height: 400px; margin: 0 auto;"></div>
+
+  <!-- Окошко ввода и кнопка -->
+  <div id="controls">
+    <input type="number" id="bias-input" value="0.6" step="0.1" min="0" max="1">
+    <button id="generate-button">Генерировать 1000 случайных чисел</button>
+  </div>
+
+  <script type="module">
+    import Bernoulli from "../../dist/esm/distributions/bernoulli.js";
+    import Highcharts from 'https://code.highcharts.com/es-modules/masters/highcharts.src.js';
+
+    // Инициализация графика
+    const chart = Highcharts.chart('chart-container', {
+      chart: {
+        type: 'column'
+      },
+      title: {
+        text: 'Random Number Distribution'
+      },
+      xAxis: {
+        categories: ['0', '1'],
+        title: {
+          text: 'Values'
+        }
+      },
+      yAxis: {
+        title: {
+          text: 'Frequency'
+        }
+      },
+      plotOptions: {
+        column: {
+          pointWidth: 20, // Ширина столбцов
+          groupPadding: 0.5 // Расстояние между столбцами
+        }
+      },
+      series: [{
+        name: 'Generated Data',
+        data: [0, 0]
+      }]
+    });
+
+    // Генерация случайных чисел и обновление графика
+    document.getElementById('generate-button').addEventListener('click', () => {
+      const bias = parseFloat(document.getElementById('bias-input').value);
+      const data = [0, 0];
+
+      // Генерация 1000 случайных чисел
+      for (let i = 0; i < 1000; i++) {
+        const randomValue = Bernoulli.random({ p: bias });
+        if (randomValue === 0) data[0]++;
+        if (randomValue === 1) data[1]++;
+      }
+
+      // Обновление графика
+      chart.series[0].setData(data);
+    });
+  </script>
+</body>
+</html>

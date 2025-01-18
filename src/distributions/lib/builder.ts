@@ -23,10 +23,11 @@ type ExtractStorageType<EntropyProvider extends EProviderType> =
     ? unknown
     : Parameters<EntropyProvider>[0]['storage'];
 
-interface BuilderI<
+export interface BuilderI<
   EntropyProvider extends EProviderType<any, any>,
   FnRandom extends FnRandomType<any>,
 > {
+  new (): BuilderI<EntropyProvider, FnRandom>;
   random: (
     params: Parameters<FnRandom>[0] &
       Omit<ExtractEPContext<EntropyProvider>, 'storage'>,
@@ -92,7 +93,7 @@ function Builder<
     }
   }
 
-  return Distribution;
+  return Distribution as unknown as BuilderI<EntropyProvider, FnRandom>;
 }
 
 export default Builder;
